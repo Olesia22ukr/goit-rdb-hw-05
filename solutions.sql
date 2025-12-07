@@ -17,3 +17,20 @@ WHERE od.order_id IN (
     FROM orders o
     WHERE o.shipper_id = 3
 );
+
+-- Task 3
+SELECT
+    temp.order_id,
+    AVG(temp.quantity) AS avg_quantity
+FROM
+    (
+        SELECT
+            order_id,
+            quantity
+        FROM
+            order_details
+        WHERE
+            quantity > 10
+    ) AS temp
+GROUP BY
+    temp.order_id;
