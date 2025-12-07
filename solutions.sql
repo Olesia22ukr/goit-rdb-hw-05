@@ -52,3 +52,23 @@ FROM
     temp
 GROUP BY
     order_id;
+-- Task 5
+DROP FUNCTION IF EXISTS divide_values;
+
+DELIMITER //
+CREATE FUNCTION divide_values(a FLOAT, b FLOAT)
+RETURNS FLOAT
+DETERMINISTIC
+NO SQL
+BEGIN
+    RETURN a / b;
+END //
+DELIMITER ;
+
+SELECT
+    id,
+    order_id,
+    product_id,
+    quantity,
+    divide_values(quantity, 2) AS divided_quantity
+FROM order_details;
